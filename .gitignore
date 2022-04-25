@@ -1,0 +1,10 @@
+/[Ll]ibrary/
+/[Ll]ogs/
+/[Oo]bj/
+/[Pp]ackages/
+[Pp]rojectSettings/ProjectVersion.txt
+/[Tt]emp/
+/[Uu]serSettings/
+Assembly-CSharp.csproj
+English App.sln
+.vs
