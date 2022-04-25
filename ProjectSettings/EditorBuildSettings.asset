@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DoTest.unity
     guid: 8976325095f957a42a2f7d3f1ba927d6
+  - enabled: 1
+    path: Assets/Scenes/CreateNewTest.unity
+    guid: a48ce10023ccd404ba93408b12aa76fa
+  - enabled: 1
+    path: Assets/Scenes/Test.unity
+    guid: 0e9ca1efc595a9a4fa48f1f4cba2ac9d
   m_configObjects: {}

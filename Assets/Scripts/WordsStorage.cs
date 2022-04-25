@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WordsStorage : ScriptableObject
 {
-    private List<WordMeaning> dictionary = new List<WordMeaning>()
+    private static List<WordMeaning> dictionary = new List<WordMeaning>()
     {
         new WordMeaning("Time", "Время"),
         new WordMeaning("Year", "Год"),
@@ -106,10 +107,12 @@ public class WordsStorage : ScriptableObject
         new WordMeaning("Force", "Сила"),
         new WordMeaning("Education", "Образование")
     };
+    public static List<WordMeaning> Dictionary => new List<WordMeaning>(dictionary);
 
-    public List<WordMeaning> Dictionary => new List<WordMeaning>(dictionary);
+    private static List<string> namesOfTests = new List<string>();
+    public static List<string> NamesOfTests { get => namesOfTests; set => namesOfTests = value; }
 
-    public List<string> GetWords()
+    public static List<string> GetWords()
     {
         var words = new List<string>();
 
@@ -119,12 +122,12 @@ public class WordsStorage : ScriptableObject
         return words;
     }
 
-    public void AddNewEntity(string word, string meaning)
+    public static void AddNewEntity(string word, string meaning)
     {
         dictionary.Add(new WordMeaning(word, meaning));
     }
 
-    public WordMeaning GetEntityByWord(string word)
+    public static WordMeaning GetEntityByWord(string word)
     {
         foreach (var wordMeaning in dictionary)
             if (wordMeaning.Word.Equals(word))
@@ -133,7 +136,7 @@ public class WordsStorage : ScriptableObject
         return new WordMeaning();
     }
 
-    public void ChangeMeaningByWord(string meaning, string word)
+    public static void ChangeMeaningByWord(string meaning, string word)
     {
         for (int i = 0; i < dictionary.Count; i++)
             if (dictionary[i].Word.Equals(word))
@@ -143,7 +146,7 @@ public class WordsStorage : ScriptableObject
             }
     }
 
-    public void DeleteEntity(string word)
+    public static void DeleteEntity(string word)
     {
         for (int i = 0; i < dictionary.Count; i++)
             if (dictionary[i].Word.Equals(word))
@@ -154,6 +157,7 @@ public class WordsStorage : ScriptableObject
     }
 }
 
+[Serializable]
 public struct WordMeaning
 {
     private string word;
