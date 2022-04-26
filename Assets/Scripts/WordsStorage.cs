@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "WordStorage", menuName = "ScriptObjs", order = 50)]
 public class WordsStorage : ScriptableObject
 {
     private static List<WordMeaning> dictionary = new List<WordMeaning>()
@@ -108,9 +110,6 @@ public class WordsStorage : ScriptableObject
         new WordMeaning("Education", "Образование")
     };
     public static List<WordMeaning> Dictionary => new List<WordMeaning>(dictionary);
-
-    private static List<string> namesOfTests = new List<string>();
-    public static List<string> NamesOfTests { get => namesOfTests; set => namesOfTests = value; }
 
     public static List<string> GetWords()
     {

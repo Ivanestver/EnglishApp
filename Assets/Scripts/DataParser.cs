@@ -8,15 +8,24 @@ public class DataParser : ScriptableObject
 {
     private static string pathToJsonFolder = "./Тесты";
 
+    public static List<string> GetNamesOfTests()
+    {
+        var namesOfFiles = Directory.GetFiles(pathToJsonFolder);
+        for (int i = 0; i < namesOfFiles.Length; i++)
+        {
+            var splittedFullName = namesOfFiles[i].Split('\\');
+            namesOfFiles[i] = splittedFullName[splittedFullName.Length - 1].Split('.')[0];
+        }
+
+        return new List<string>(namesOfFiles);
+    }
+
     public static void WriteWordsToFile(string fileName, List<string> words)
     {
         string jsonString = JsonConvert.SerializeObject(words);
 
         if (!Directory.Exists(pathToJsonFolder))
             Directory.CreateDirectory(pathToJsonFolder);
-
-        if (WordsStorage.NamesOfTests.IndexOf(fileName) == -1)
-            WordsStorage.NamesOfTests.Add(fileName);
 
         using (FileStream fs = File.Create($"{pathToJsonFolder}/{fileName}.json"))
         {
