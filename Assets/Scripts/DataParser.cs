@@ -49,4 +49,11 @@ public class DataParser : ScriptableObject
             return words;
         }
     }
+
+    public static void DeleteFile(string fileName)
+    {
+        string path = $"{pathToJsonFolder}/{fileName}.json";
+        if (File.Exists(path))
+            File.Delete(path);
+    }
 }

@@ -265,7 +265,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00062895933}
+  m_AnchoredPosition: {x: 0, y: 0.000035161975}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &196075872
@@ -611,7 +611,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 478764878}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9524324
+  m_Size: 0.99959195
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -940,7 +940,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0442\u0435\u0441\u0442"
+  m_Text: "\u0413\u043E\u0442\u043E\u0432\u043E"
 --- !u!222 &738944481
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1863,7 +1863,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2065514896}
         m_TargetAssemblyTypeName: CreateNewTestController, Assembly-CSharp
-        m_MethodName: AddNewTest
+        m_MethodName: Done
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2212,4 +2212,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionGM: {fileID: 366029325897270034, guid: 56dbde3cb857a844885ba15be7113ddc, type: 3}
   contentPlace: {fileID: 196075871}
-  testName: {fileID: 982837833}
+  testName: {fileID: 578001240}

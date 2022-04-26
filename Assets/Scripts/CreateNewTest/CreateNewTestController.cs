@@ -1,16 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.IO;
-using System.Text;
 
 public class CreateNewTestController : MonoBehaviour
 {
     [SerializeField] private GameObject optionGM;
     [SerializeField] private Transform contentPlace;
-    [SerializeField] private Text testName;
+    [SerializeField] private InputField testName;
+
+    private void Start()
+    {
+        if (EditOpener.IsEdit)
+            FillFields();
+    }
+
+    private void FillFields()
+    {
+        testName.text = EditWindowController.NameOfSelectedTest;
+        var wordsInTest = DataParser.ReadWordsFromFile(EditWindowController.NameOfSelectedTest);
+
+        var words = WordsStorage.GetWords();
+        foreach (var word in wordsInTest)
+        {
+            var newOption = Instantiate(optionGM, contentPlace);
+            var dropdown = newOption.GetComponent<Dropdown>();
+            dropdown.ClearOptions();
+            dropdown.AddOptions(words);
+            dropdown.value = dropdown.options.FindIndex(option => option.text == word);
+        }
+    }
 
     public void AddNewWord()
     {
@@ -21,7 +40,7 @@ public class CreateNewTestController : MonoBehaviour
         dropdown.AddOptions(words);
     }
 
-    public void AddNewTest()
+    public void Done()
     {
         List<string> words = new List<string>();
         for (int i = 0; i < contentPlace.childCount; i++)
@@ -31,6 +50,7 @@ public class CreateNewTestController : MonoBehaviour
             words.Add(word);
         }
 
+        DataParser.DeleteFile(EditWindowController.NameOfSelectedTest);
         DataParser.WriteWordsToFile(testName.text, words);
     }
 
