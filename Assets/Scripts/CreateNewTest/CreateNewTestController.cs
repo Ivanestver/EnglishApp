@@ -61,6 +61,8 @@ public class CreateNewTestController : MonoBehaviour
         DataParser.DeleteFile(EditWindowController.NameOfSelectedTest);
         DataParser.AddNewTest(testName.text);
         DataParser.WriteWordsToFile(testName.text, words);
+
+        Cancel();
     }
 
     public void Cancel()

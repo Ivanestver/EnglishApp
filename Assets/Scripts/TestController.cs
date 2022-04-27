@@ -158,6 +158,7 @@ public class TestController : MonoBehaviour
 
     public void BackToChooseTest()
     {
+        PersonalDataHandler.IsValidated = true;
         SceneManager.LoadScene(2);
     }
 }
