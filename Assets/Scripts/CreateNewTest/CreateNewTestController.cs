@@ -40,6 +40,14 @@ public class CreateNewTestController : MonoBehaviour
         dropdown.AddOptions(words);
     }
 
+    public void DeleteLastWord()
+    {
+        if (contentPlace.childCount == 0)
+            return;
+
+        Destroy(contentPlace.GetChild(contentPlace.childCount - 1).gameObject);
+    }
+
     public void Done()
     {
         List<string> words = new List<string>();
