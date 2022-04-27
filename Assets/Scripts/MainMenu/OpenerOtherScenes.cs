@@ -12,4 +12,10 @@ public class OpenerOtherScenes : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
+    public void Exit()
+    {
+        print("Done");
+        Application.Quit();
+    }
 }
