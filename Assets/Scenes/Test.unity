@@ -240,7 +240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &223477222
 RectTransform:
   m_ObjectHideFlags: 0
@@ -315,7 +315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &237693801
 RectTransform:
   m_ObjectHideFlags: 0
@@ -390,7 +390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &256106661
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1665,13 +1665,15 @@ MonoBehaviour:
   - {fileID: 625396071}
   - {fileID: 260747039}
   - {fileID: 1188435417}
-  secondsToWait: 0
+  secondsToWait: 1.5
   testPanel: {fileID: 768574047}
   resultPanel: {fileID: 1821378849}
   correct: {fileID: 956053047}
   correctPersent: {fileID: 1544582823}
   wrong: {fileID: 1016335961}
   wrongPersent: {fileID: 1213273623}
+  successSprite: {fileID: 21300000, guid: 84107ca853796d54e940eef9cab669f4, type: 3}
+  failSprite: {fileID: 21300000, guid: 3a3accd097b51da40b9c663dfb65b52e, type: 3}
 --- !u!1 &1299991069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1864,7 +1866,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15.697, y: 0}
+  m_AnchoredPosition: {x: -15.696999, y: 0}
   m_SizeDelta: {x: -31.392487, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1532952565

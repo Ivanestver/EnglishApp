@@ -9,7 +9,7 @@ public class TestController : MonoBehaviour
 {
     [SerializeField] private Text wordField;
     [SerializeField] private GameObject[] options;
-    [SerializeField] private int secondsToWait;
+    [SerializeField] private float secondsToWait;
 
     [SerializeField] private GameObject testPanel;
     [SerializeField] private GameObject resultPanel;
@@ -18,6 +18,9 @@ public class TestController : MonoBehaviour
     [SerializeField] private Text correctPersent;
     [SerializeField] private Text wrong;
     [SerializeField] private Text wrongPersent;
+
+    [SerializeField] private Sprite successSprite;
+    [SerializeField] private Sprite failSprite;
 
     private string testName = "";
     private List<string> words;
@@ -50,7 +53,7 @@ public class TestController : MonoBehaviour
         if (selectedOption.GetComponentInChildren<Text>().text.Equals(currentTest.Meaning))
         {
             correctCount++;
-            StartCoroutine(OnSuccess(selectedOption.GetComponent<Image>()));
+            StartCoroutine(OnSuccess(selectedOption.transform.GetChild(1).gameObject));
         }
         else
         {
@@ -63,16 +66,22 @@ public class TestController : MonoBehaviour
                     break;
                 }
 
-            StartCoroutine(OnFail(options[correntNumber].GetComponent<Image>(), selectedOption.GetComponent<Image>()));
+            StartCoroutine(OnFail(options[correntNumber].transform.GetChild(1).gameObject, 
+                selectedOption.transform.GetChild(1).gameObject));
         }
     }
 
-    private IEnumerator OnSuccess(Image image)
+    private IEnumerator OnSuccess(GameObject result)
     {
         isHeld = true;
-        image.color = Color.green;
+
+        result.SetActive(true);
+        result.GetComponent<Image>().sprite = successSprite;
+
         yield return new WaitForSeconds(secondsToWait);
-        image.color = defaultColor;
+
+        result.SetActive(false);
+
         words.Remove(currentTest.Word);
         if (!Step())
             FinishTest();
@@ -80,13 +89,20 @@ public class TestController : MonoBehaviour
         isHeld = false;
     }
 
-    private IEnumerator OnFail(Image correct, Image wrong)
+    private IEnumerator OnFail(GameObject correct, GameObject wrong)
     {
         isHeld = true;
-        correct.color = Color.green;
-        wrong.color = Color.red;
+
+        correct.SetActive(true);
+        wrong.SetActive(true);
+        correct.GetComponent<Image>().sprite = successSprite;
+        wrong.GetComponent<Image>().sprite = failSprite;
+
         yield return new WaitForSeconds(secondsToWait);
-        correct.color = wrong.color = defaultColor;
+
+        correct.SetActive(false);
+        wrong.SetActive(false);
+
         words.Remove(currentTest.Word);
         if (!Step())
             FinishTest();
