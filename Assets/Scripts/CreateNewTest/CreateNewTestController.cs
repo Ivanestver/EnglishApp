@@ -65,6 +65,7 @@ public class CreateNewTestController : MonoBehaviour
 
     public void Cancel()
     {
+        Validation.IsValidated = true;
         SceneManager.LoadScene(1);
     }
 }
