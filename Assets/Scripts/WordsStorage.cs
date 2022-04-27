@@ -135,6 +135,16 @@ public class WordsStorage : ScriptableObject
         return new WordMeaning();
     }
 
+    public static string GetMeaningByWord(string word)
+    {
+        return GetEntityByWord(word).Meaning;
+    }
+
+    public static WordMeaning GetRandomEntity()
+    {
+        return dictionary[UnityEngine.Random.Range(0, dictionary.Count)];
+    }
+
     public static void ChangeMeaningByWord(string meaning, string word)
     {
         for (int i = 0; i < dictionary.Count; i++)
