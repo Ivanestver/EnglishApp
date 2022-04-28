@@ -93,6 +93,7 @@ public class Test
     private string testName = "";
 
     public string TestName { get => testName; set => testName = value; }
+    public List<Question> Questions => questions;
 
     public Test()
     { }
@@ -189,6 +190,7 @@ public class Question
     private string[] answers = new string[3]; // Первый всегда верный
 
     public string Instruction { get => instruction; set => instruction = value; }
+    public string TrueValue => answers[0];
 
     public void SetAnswer(int number, string answer)
     {

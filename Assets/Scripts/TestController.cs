@@ -10,6 +10,7 @@ public class TestController : MonoBehaviour
     [SerializeField] private Text wordField;
     [SerializeField] private GameObject[] options;
     [SerializeField] private float secondsToWait;
+    [SerializeField] private Button submit, nextQuestion;
 
     [SerializeField] private GameObject testPanel;
     [SerializeField] private GameObject resultPanel;
@@ -22,92 +23,109 @@ public class TestController : MonoBehaviour
     [SerializeField] private Sprite successSprite;
     [SerializeField] private Sprite failSprite;
 
-    private string testName = "";
-    private List<string> words;
+    [SerializeField] private Color selectedColor;
+
+    private List<Question> words;
     private int correctCount = 0;
     private int wrongCount = 0;
     private int count = 0;
-    private WordMeaning currentTest = new WordMeaning();
     private Color defaultColor = new Color();
-    private bool isHeld = false;
+    private Question currentQuestion = null;
+    private int currentWordPlace = 0;
+    private Image[] testButtonImages = new Image[3];
+    private bool isChosen = false;
 
     private void Start()
     {
-        testName = TestListController.NameOfTest;
-        words = DataParser.ReadWordsFromFile(testName);
-        foreach (var option in options)
-            option.GetComponent<Button>().onClick.AddListener(OnOptionButtonClick);
-
+        words = ChooseTestHandler.SelectedTest.Questions;
         count = words.Count;
+
+        submit.onClick.AddListener(OnSubmitButtonClick);
+        nextQuestion.onClick.AddListener(OnNextPressed);
+
+        testButtonImages[0] = options[0].GetComponent<Image>();
+        testButtonImages[1] = options[1].GetComponent<Image>();
+        testButtonImages[2] = options[2].GetComponent<Image>();
+        foreach (var option in options)
+        {
+            option.GetComponent<Button>().onClick.AddListener(OnOptionClick);
+        }
+
         defaultColor = options[0].GetComponent<Image>().color;
 
         Step();
     }
 
-    private void OnOptionButtonClick()
+    public void OnOptionClick()
     {
-        if (isHeld)
-            return;
+        var clickedButton = EventSystem.current.currentSelectedGameObject;
+        var clickedButtonImageComponent = clickedButton.GetComponent<Image>();
 
-        var selectedOption = EventSystem.current.currentSelectedGameObject;
-        if (selectedOption.GetComponentInChildren<Text>().text.Equals(currentTest.Meaning))
+        foreach (var image in testButtonImages)
+            image.color = defaultColor;
+
+        if (clickedButtonImageComponent.color == defaultColor)
         {
-            correctCount++;
-            StartCoroutine(OnSuccess(selectedOption.transform.GetChild(1).gameObject));
+            clickedButtonImageComponent.color = selectedColor;
         }
         else
         {
-            wrongCount++;
-            int correntNumber = 0;
-            for (int i = 0; i < options.Length; i++)
-                if (options[i].GetComponentInChildren<Text>().text.Equals(currentTest.Meaning))
-                {
-                    correntNumber = i;
-                    break;
-                }
-
-            StartCoroutine(OnFail(options[correntNumber].transform.GetChild(1).gameObject, 
-                selectedOption.transform.GetChild(1).gameObject));
+            clickedButtonImageComponent.color = defaultColor;
         }
     }
 
-    private IEnumerator OnSuccess(GameObject result)
+    private void OnSubmitButtonClick()
     {
-        isHeld = true;
+        for (int i = 0; i < options.Length; i++)
+        {
+            if (options[i].GetComponent<Image>().color != defaultColor)
+            {
+                if (options[i].GetComponentInChildren<Text>().text.Equals(currentQuestion.TrueValue))
+                {
+                    correctCount++;
+                    OnSuccess(options[i].transform.GetChild(1).gameObject);
+                }
+                else
+                {
+                    wrongCount++;
+                    OnFail(options[currentWordPlace].transform.GetChild(1).gameObject, options[i].transform.GetChild(1).gameObject);
+                }
 
-        result.SetActive(true);
-        result.GetComponent<Image>().sprite = successSprite;
+                break;
+            }
+        }
 
-        yield return new WaitForSeconds(secondsToWait);
-
-        result.SetActive(false);
-
-        words.Remove(currentTest.Word);
-        if (!Step())
-            FinishTest();
-
-        isHeld = false;
+        isChosen = true;
     }
 
-    private IEnumerator OnFail(GameObject correct, GameObject wrong)
+    private void OnSuccess(GameObject result)
     {
-        isHeld = true;
+        result.SetActive(true);
+        result.GetComponent<Image>().sprite = successSprite;
+    }
 
+    private void OnFail(GameObject correct, GameObject wrong)
+    {
         correct.SetActive(true);
         wrong.SetActive(true);
         correct.GetComponent<Image>().sprite = successSprite;
         wrong.GetComponent<Image>().sprite = failSprite;
+    }
 
-        yield return new WaitForSeconds(secondsToWait);
+    private void OnNextPressed()
+    {
+        if (!isChosen)
+            return;
 
-        correct.SetActive(false);
-        wrong.SetActive(false);
+        foreach (var btn in options)
+        {
+            btn.transform.GetChild(1).gameObject.SetActive(false);
+            btn.GetComponent<Image>().color = defaultColor;
+        }
 
-        words.Remove(currentTest.Word);
         if (!Step())
             FinishTest();
-
-        isHeld = false;
+        isChosen = false;
     }
 
     private bool Step()
@@ -115,16 +133,9 @@ public class TestController : MonoBehaviour
         if (words.Count == 0)
             return false;
 
-        /*int currentTestNumber = Random.Range(0, words.Count);
-        string currentWord = words[currentTestNumber];
-        string currentMeaning = WordsStorage.GetMeaningByWord(currentWord);
-        currentTest.Word = currentWord;
-        currentTest.Meaning = currentMeaning;
+        currentQuestion = words[Random.Range(0, words.Count)];
 
-        var wrongOptionOne = WordsStorage.GetRandomEntity();
-        var wrongOptionTwo = WordsStorage.GetRandomEntity();
-
-        int currentWordPlace = Random.Range(0, 3);
+        currentWordPlace = Random.Range(0, 3);
         int wrongOptionOnePlace = Random.Range(0, 3);
         while (wrongOptionOnePlace == currentWordPlace)
             wrongOptionOnePlace = Random.Range(0, 3);
@@ -137,10 +148,12 @@ public class TestController : MonoBehaviour
         else
             wrongOptionTwoPlace = wrongOptionOnePlace == 0 ? 1 : 0;
 
-        wordField.text = currentWord;
-        options[currentWordPlace].GetComponentInChildren<Text>().text = currentMeaning;
-        options[wrongOptionOnePlace].GetComponentInChildren<Text>().text = wrongOptionOne.Meaning;
-        options[wrongOptionTwoPlace].GetComponentInChildren<Text>().text = wrongOptionTwo.Meaning;*/
+        wordField.text = currentQuestion.Instruction;
+        options[currentWordPlace].GetComponentInChildren<Text>().text = currentQuestion.TrueValue;
+        options[wrongOptionOnePlace].GetComponentInChildren<Text>().text = currentQuestion.GetAnswerByNumber(1);
+        options[wrongOptionTwoPlace].GetComponentInChildren<Text>().text = currentQuestion.GetAnswerByNumber(2);
+
+        words.Remove(currentQuestion);
 
         return true;
     }

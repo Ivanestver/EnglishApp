@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PersonalDataHandler : MonoBehaviour
@@ -18,6 +19,16 @@ public class PersonalDataHandler : MonoBehaviour
     private bool isHeld = false;
 
     public static bool IsValidated = false;
+
+    private void OnEnable()
+    {
+        if (IsValidated)
+        {
+            listPanel.SetActive(true);
+            inputPanel.SetActive(false);
+            return;
+        }
+    }
 
     private void OnDisable()
     {
@@ -61,6 +72,11 @@ public class PersonalDataHandler : MonoBehaviour
         listPanel.SetActive(true);
         inputPanel.SetActive(false);
         IsValidated = true;
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private IEnumerator ShowMessage(string message)

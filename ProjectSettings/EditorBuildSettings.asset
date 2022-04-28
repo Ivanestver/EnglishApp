@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/CreateNewTheme.unity
     guid: 4a918d18fe9d71146893dae266a701f7
   - enabled: 1
-    path: Assets/Scenes/DoTest.unity
+    path: Assets/Scenes/ChooseTheme.unity
     guid: 8976325095f957a42a2f7d3f1ba927d6
   - enabled: 1
     path: Assets/Scenes/CreateNewTest.unity
@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Editor.unity
     guid: b0a6dc7538cc04a44a9c2e48abb1044a
+  - enabled: 1
+    path: Assets/Scenes/ChooseTest.unity
+    guid: bfe9b8d317656d54e9def10cbc72c283
   m_configObjects: {}
