@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Storage", menuName = "ScriptObjs/Storage", order = 50)]
 public class Storage : ScriptableObject

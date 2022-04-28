@@ -115,7 +115,7 @@ public class TestController : MonoBehaviour
         if (words.Count == 0)
             return false;
 
-        int currentTestNumber = Random.Range(0, words.Count);
+        /*int currentTestNumber = Random.Range(0, words.Count);
         string currentWord = words[currentTestNumber];
         string currentMeaning = WordsStorage.GetMeaningByWord(currentWord);
         currentTest.Word = currentWord;
@@ -140,7 +140,7 @@ public class TestController : MonoBehaviour
         wordField.text = currentWord;
         options[currentWordPlace].GetComponentInChildren<Text>().text = currentMeaning;
         options[wrongOptionOnePlace].GetComponentInChildren<Text>().text = wrongOptionOne.Meaning;
-        options[wrongOptionTwoPlace].GetComponentInChildren<Text>().text = wrongOptionTwo.Meaning;
+        options[wrongOptionTwoPlace].GetComponentInChildren<Text>().text = wrongOptionTwo.Meaning;*/
 
         return true;
     }

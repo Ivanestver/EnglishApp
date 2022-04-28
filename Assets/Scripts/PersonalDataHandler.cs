@@ -22,9 +22,6 @@ public class PersonalDataHandler : MonoBehaviour
     private void OnDisable()
     {
         IsValidated = false;
-        storage.StudentName = "";
-        storage.StudentClass = "";
-        storage.StudentSchool = "";
     }
 
     public void OnSubmit()

@@ -10,12 +10,11 @@ public class OpenerOtherScenes : MonoBehaviour
 
     public void OpenEditor()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(6);
     }
 
     public void Exit()
     {
-        print("Done");
         Application.Quit();
     }
 }
