@@ -35,6 +35,7 @@ public class StatController : MonoBehaviour
 
     public void BackToMenu()
     {
+        Validation.IsValidated = false;
         SceneManager.LoadScene(0);
     }
 }

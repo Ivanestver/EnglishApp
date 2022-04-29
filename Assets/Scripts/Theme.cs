@@ -37,10 +37,10 @@ public class Theme
     public void Serialize()
     {
         string path = $"{rootDirectory}/{themeName}";
-        if (!Directory.Exists(path))
-            Directory.CreateDirectory(path);
-        else
+        if (Directory.Exists(path))
             Directory.Delete(path, true);
+
+        Directory.CreateDirectory(path);
 
         foreach (Test test in tests)
             test.Serialize(path);

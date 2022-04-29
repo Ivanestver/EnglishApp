@@ -25,8 +25,8 @@ public class CreateNewTestController : MonoBehaviour
     private void FillFields()
     {
         Clear();
-        testName.text = CreateNewThemeController.SelectedTest.TestName;
-        var tests = CreateNewThemeController.SelectedTest.GetQuestionInstructions();
+        testName.text = EditWindowController.SelectedTest.TestName;
+        var tests = EditWindowController.SelectedTest.GetQuestionInstructions();
         foreach (var test in tests)
         {
             var newQuestion = Instantiate(optionGM, contentPlace);
@@ -58,7 +58,7 @@ public class CreateNewTestController : MonoBehaviour
         if (clickedButtonImageComponent.color == defaultColor)
         {
             clickedButtonImageComponent.color = selectedColor;
-            SelectedQuestion = CreateNewThemeController.SelectedTest.GetQuestionByInstruction(clickedButton.GetComponentInChildren<Text>().text);
+            SelectedQuestion = EditWindowController.SelectedTest.GetQuestionByInstruction(clickedButton.GetComponentInChildren<Text>().text);
         }
         else
         {
@@ -70,8 +70,8 @@ public class CreateNewTestController : MonoBehaviour
     public void AddNewQuestion()
     {
         SelectedQuestion = new Question();
-        CreateNewThemeController.SelectedTest.TestName = testName.text;
-        CreateNewThemeController.SelectedTest.AddNewQuestion(SelectedQuestion);
+        EditWindowController.SelectedTest.TestName = testName.text;
+        EditWindowController.SelectedTest.AddNewQuestion(SelectedQuestion);
         SceneManager.LoadScene(5);
     }
 
@@ -88,30 +88,30 @@ public class CreateNewTestController : MonoBehaviour
         if (contentPlace.childCount == 0)
             return;
 
-        CreateNewThemeController.SelectedTest.DeleteQuestion(SelectedQuestion);
+        EditWindowController.SelectedTest.DeleteQuestion(SelectedQuestion);
         FillFields();
         SelectedQuestion = null;
     }
 
     public void Done()
     {
-        CreateNewThemeController.SelectedTest.TestName = testName.text;
-        string path = $"{Theme.rootDirectory}/{EditWindowController.SelectedTheme}";
-        CreateNewThemeController.SelectedTest.Serialize(path);
-        SceneManager.LoadScene(1);
+        EditWindowController.SelectedTest.TestName = testName.text;
+        string path = $"{Theme.rootDirectory}/{EditWindowController.SelectedTheme.ThemeName}";
+        EditWindowController.SelectedTest.Serialize(path);
+        SceneManager.LoadScene(6);
     }
 
     public void Cancel()
     {
-        if (CreateNewThemeController.SelectedTest.TestName.Length == 0)
+        if (EditWindowController.SelectedTest.TestName.Length == 0)
         {
-            CreateNewThemeController.SelectedTest.DeleteQuestion(SelectedQuestion);
-            EditWindowController.SelectedTheme.DeleteTest(CreateNewThemeController.SelectedTest);
-            CreateNewThemeController.SelectedTest = null;
+            EditWindowController.SelectedTest.DeleteQuestion(SelectedQuestion);
+            EditWindowController.SelectedTheme.DeleteTest(EditWindowController.SelectedTest);
+            EditWindowController.SelectedTest = null;
             SelectedQuestion = null;
         }        
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(6);
     }
 
     public void OnMoveUpButtonClicked()
@@ -119,7 +119,7 @@ public class CreateNewTestController : MonoBehaviour
         if (SelectedQuestion == null)
             return;
 
-        CreateNewThemeController.SelectedTest.MoveQuestionUp(SelectedQuestion);
+        EditWindowController.SelectedTest.MoveQuestionUp(SelectedQuestion);
         FillFields();
         SelectedQuestion = null;
     }
@@ -129,7 +129,7 @@ public class CreateNewTestController : MonoBehaviour
         if (SelectedQuestion == null)
             return;
 
-        CreateNewThemeController.SelectedTest.MoveQuestionDown(SelectedQuestion);
+        EditWindowController.SelectedTest.MoveQuestionDown(SelectedQuestion);
         FillFields();
         SelectedQuestion = null;
     }

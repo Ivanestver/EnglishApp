@@ -6,14 +6,17 @@ using UnityEngine.UI;
 
 public class EditWindowController : MonoBehaviour
 {
-    [SerializeField] private Transform place;
+    [SerializeField] private Transform themeContent;
+    [SerializeField] private Transform testContent;
     [SerializeField] private GameObject textObj;
     [SerializeField] private Color selectedColor;
-
+    [SerializeField] private InputField themeName;
     private Color defaultColor;
+    private List<Image> themeButtonImages = new List<Image>();
     private List<Image> testButtonImages = new List<Image>();
 
     public static Theme SelectedTheme = null;
+    public static Test SelectedTest = null;
 
     private void Start()
     {
@@ -22,33 +25,71 @@ public class EditWindowController : MonoBehaviour
 
     private void Init()
     {
-        Clear();
+        ClearThemes();
         var tests = WordsStorage.GetAllThemes();
         if (tests.Count == 0)
             return;
 
         for (int i = 0; i < tests.Count; i++)
         {
-            var themeGO = Instantiate(textObj, place);
+            var themeGO = Instantiate(textObj, themeContent);
             themeGO.transform.GetComponentInChildren<Text>().text = tests[i];
             themeGO.GetComponent<Button>().onClick.AddListener(OnThemeButtonClick);
-            testButtonImages.Add(themeGO.GetComponent<Image>());
+            themeButtonImages.Add(themeGO.GetComponent<Image>());
         }
 
         defaultColor = textObj.GetComponent<Image>().color;
     }
 
-    private void Clear()
+    private void ClearThemes()
     {
-        testButtonImages.Clear();
+        themeButtonImages.Clear();
 
-        for (int i = 0; i < place.childCount; i++)
-            Destroy(place.GetChild(i).gameObject);
+        for (int i = 0; i < themeContent.childCount; i++)
+            Destroy(themeContent.GetChild(i).gameObject);
 
         SelectedTheme = null;
     }
 
+    private void ClearTests()
+    {
+        if (testContent.childCount == 0)
+            return;
+
+        testButtonImages.Clear();
+
+        for (int i = 0; i < testContent.childCount; i++)
+            Destroy(testContent.GetChild(i).gameObject);
+    }
+
     public void OnThemeButtonClick()
+    {
+        var clickedButton = EventSystem.current.currentSelectedGameObject;
+        var clickedButtonImageComponent = clickedButton.GetComponent<Image>();
+
+        foreach (var image in themeButtonImages)
+            image.color = defaultColor;
+
+        clickedButtonImageComponent.color = selectedColor;
+        SelectedTheme = WordsStorage.GetThemeByName(clickedButton.GetComponentInChildren<Text>().text);
+        themeName.text = SelectedTheme.ThemeName;
+        ShowTests();
+    }
+
+    private void ShowTests()
+    {
+        ClearTests();
+        var tests = SelectedTheme.GetTestNames();
+        foreach (var test in tests)
+        {
+            var newtest = Instantiate(textObj, testContent);
+            newtest.GetComponentInChildren<Text>().text = test;
+            newtest.GetComponent<Button>().onClick.AddListener(OnTestButtonClick);
+            testButtonImages.Add(newtest.GetComponent<Image>());
+        }
+    }
+
+    public void OnTestButtonClick()
     {
         var clickedButton = EventSystem.current.currentSelectedGameObject;
         var clickedButtonImageComponent = clickedButton.GetComponent<Image>();
@@ -59,12 +100,12 @@ public class EditWindowController : MonoBehaviour
         if (clickedButtonImageComponent.color == defaultColor)
         {
             clickedButtonImageComponent.color = selectedColor;
-            SelectedTheme = WordsStorage.GetThemeByName(clickedButton.GetComponentInChildren<Text>().text);
+            SelectedTest = SelectedTheme.GetTestByTestName(clickedButton.GetComponentInChildren<Text>().text);
         }
         else
         {
             clickedButtonImageComponent.color = defaultColor;
-            SelectedTheme = null;
+            SelectedTest = null;
         }
     }
 
@@ -72,19 +113,49 @@ public class EditWindowController : MonoBehaviour
     {
         WordsStorage.DeleteTheme(SelectedTheme);
         SelectedTheme = null;
+        SelectedTest = null;
         Init();
+    }
+
+    public void OnDeleteTestButtonClicked()
+    {
+        SelectedTheme.DeleteTest(SelectedTest);
+        ShowTests();
     }
 
     public void BackToMenu()
     {
         Validation.IsValidated = false;
+        WordsStorage.SaveData();
         SceneManager.LoadScene(0);
+    }
+
+    public void OnEndThemeNameEdit(string name)
+    {
+        SelectedTheme.ThemeName = name;
+        SelectedTheme.Serialize();
+        Init();
     }
 
     public void AddNewTheme()
     {
         SelectedTheme = new Theme();
-        SceneManager.LoadScene(1);
+        ClearTests();
+        var themeGO = Instantiate(textObj, themeContent);
+        themeGO.GetComponent<Button>().onClick.AddListener(OnThemeButtonClick);
+        themeButtonImages.Add(themeGO.GetComponent<Image>());
+    }
+
+    public void AddNewTest()
+    {
+        SelectedTest = new Test();
+        SelectedTheme.AddNewTest(SelectedTest);
+        SceneManager.LoadScene(3);
+    }
+
+    public void OnEditTestButtonClicked()
+    {
+        SceneManager.LoadScene(3);
     }
 
     public void EditTheme()
