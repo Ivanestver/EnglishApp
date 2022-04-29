@@ -111,6 +111,9 @@ public class EditWindowController : MonoBehaviour
 
     public void OnDeleteThemeButtonClicked()
     {
+        if (SelectedTheme == null)
+            return;
+
         WordsStorage.DeleteTheme(SelectedTheme);
         SelectedTheme = null;
         SelectedTest = null;
@@ -119,6 +122,9 @@ public class EditWindowController : MonoBehaviour
 
     public void OnDeleteTestButtonClicked()
     {
+        if (SelectedTheme == null || SelectedTest == null)
+            return;
+
         SelectedTheme.DeleteTest(SelectedTest);
         ShowTests();
     }
@@ -155,11 +161,9 @@ public class EditWindowController : MonoBehaviour
 
     public void OnEditTestButtonClicked()
     {
-        SceneManager.LoadScene(4);
-    }
+        if (SelectedTest == null)
+            return;
 
-    public void EditTheme()
-    {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(4);
     }
 }

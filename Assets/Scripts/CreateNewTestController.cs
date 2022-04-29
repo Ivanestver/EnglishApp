@@ -27,10 +27,10 @@ public class CreateNewTestController : MonoBehaviour
         Clear();
         testName.text = EditWindowController.SelectedTest.TestName;
         var tests = EditWindowController.SelectedTest.GetQuestionInstructions();
-        foreach (var test in tests)
+        for (int i = 0; i < tests.Count; i++)
         {
             var newQuestion = Instantiate(optionGM, contentPlace);
-            newQuestion.GetComponentInChildren<Text>().text = test;
+            newQuestion.GetComponentInChildren<Text>().text = $"#{i + 1}. {tests[i]}";
             newQuestion.GetComponentInChildren<Button>().onClick.AddListener(OnQuestionButtonClick);
             testButtonImages.Add(newQuestion.GetComponent<Image>());
         }
@@ -58,7 +58,8 @@ public class CreateNewTestController : MonoBehaviour
         if (clickedButtonImageComponent.color == defaultColor)
         {
             clickedButtonImageComponent.color = selectedColor;
-            SelectedQuestion = EditWindowController.SelectedTest.GetQuestionByInstruction(clickedButton.GetComponentInChildren<Text>().text);
+            SelectedQuestion = EditWindowController.SelectedTest.
+                GetQuestionByInstruction(clickedButton.GetComponentInChildren<Text>().text.Split(' ')[1]);
         }
         else
         {
