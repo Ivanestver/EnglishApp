@@ -9,27 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/CreateNewTheme.unity
-    guid: 4a918d18fe9d71146893dae266a701f7
-  - enabled: 1
     path: Assets/Scenes/ChooseTheme.unity
     guid: 8976325095f957a42a2f7d3f1ba927d6
-  - enabled: 1
-    path: Assets/Scenes/CreateNewTest.unity
-    guid: a48ce10023ccd404ba93408b12aa76fa
-  - enabled: 1
-    path: Assets/Scenes/Test.unity
-    guid: 0e9ca1efc595a9a4fa48f1f4cba2ac9d
-  - enabled: 1
-    path: Assets/Scenes/CreateNewQuestion.unity
-    guid: 4a67dd1094d98ff46a3ac528165496ef
   - enabled: 1
     path: Assets/Scenes/Editor.unity
     guid: b0a6dc7538cc04a44a9c2e48abb1044a
   - enabled: 1
-    path: Assets/Scenes/ChooseTest.unity
-    guid: bfe9b8d317656d54e9def10cbc72c283
-  - enabled: 1
     path: Assets/Scenes/Results.unity
     guid: 33dad8fcc44616a4da37c10e796210ef
+  - enabled: 1
+    path: Assets/Scenes/CreateNewTest.unity
+    guid: a48ce10023ccd404ba93408b12aa76fa
+  - enabled: 1
+    path: Assets/Scenes/CreateNewQuestion.unity
+    guid: 4a67dd1094d98ff46a3ac528165496ef
+  - enabled: 1
+    path: Assets/Scenes/Test.unity
+    guid: 0e9ca1efc595a9a4fa48f1f4cba2ac9d
   m_configObjects: {}

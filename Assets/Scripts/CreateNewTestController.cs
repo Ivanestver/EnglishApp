@@ -98,7 +98,7 @@ public class CreateNewTestController : MonoBehaviour
         EditWindowController.SelectedTest.TestName = testName.text;
         string path = $"{Theme.rootDirectory}/{EditWindowController.SelectedTheme.ThemeName}";
         EditWindowController.SelectedTest.Serialize(path);
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene(2);
     }
 
     public void Cancel()
@@ -111,7 +111,7 @@ public class CreateNewTestController : MonoBehaviour
             SelectedQuestion = null;
         }        
 
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene(2);
     }
 
     public void OnMoveUpButtonClicked()

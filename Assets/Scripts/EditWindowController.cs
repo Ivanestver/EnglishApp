@@ -150,12 +150,12 @@ public class EditWindowController : MonoBehaviour
     {
         SelectedTest = new Test();
         SelectedTheme.AddNewTest(SelectedTest);
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
 
     public void OnEditTestButtonClicked()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
 
     public void EditTheme()

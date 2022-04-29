@@ -12,17 +12,17 @@ public class OpenerOtherScenes : MonoBehaviour
 
     public void OpenStartTesting()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 
     public void OpenEditor()
     {
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene(2);
     }
 
     public void OpenStat()
     {
-        SceneManager.LoadScene(8);
+        SceneManager.LoadScene(3);
     }
 
     public void Exit()

@@ -32,7 +32,7 @@ public class NewQuestionController : MonoBehaviour
         question.SetAnswer(1, falseField1.text);
         question.SetAnswer(2, falseField2.text);    
 
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
 
     public void OnCancel()
@@ -43,6 +43,6 @@ public class NewQuestionController : MonoBehaviour
             CreateNewTestController.SelectedQuestion = null;
         }
         
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
 }

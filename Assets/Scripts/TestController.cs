@@ -165,11 +165,11 @@ public class TestController : MonoBehaviour
         resultPanel.SetActive(true);
 
         correct.text = correctCount.ToString();
-        float correctPersentValue = (float)correctCount / count;
+        float correctPersentValue = ((float)correctCount / count) * 100;
         correctPersent.text = correctPersentValue.ToString();
 
         wrong.text = wrongCount.ToString();
-        float wrongPersentValue = (float)wrongCount / count;
+        float wrongPersentValue = ((float)wrongCount / count) * 100;
         wrongPersent.text = wrongPersentValue.ToString();
 
         var currentUserResult = storage.CurrentEntity;
@@ -185,6 +185,6 @@ public class TestController : MonoBehaviour
     public void BackToChooseTest()
     {
         PersonalDataHandler.IsValidated = true;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 }
