@@ -65,9 +65,7 @@ public class PersonalDataHandler : MonoBehaviour
             return;
         }
 
-        storage.StudentName = inputName.text;
-        storage.StudentClass = inputClass.text;
-        storage.StudentSchool = inputSchool.text;
+        storage.AddNewEntity(inputName.text, inputClass.text, inputSchool.text);
 
         listPanel.SetActive(true);
         inputPanel.SetActive(false);

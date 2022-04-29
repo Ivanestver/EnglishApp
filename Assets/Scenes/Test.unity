@@ -1869,6 +1869,7 @@ MonoBehaviour:
   secondsToWait: 1.5
   submit: {fileID: 1444932157}
   nextQuestion: {fileID: 498755022}
+  storage: {fileID: 11400000, guid: d550af165fc09d34eaf881a57a5ec437, type: 2}
   testPanel: {fileID: 768574047}
   resultPanel: {fileID: 1821378849}
   correct: {fileID: 956053047}
@@ -1877,6 +1878,7 @@ MonoBehaviour:
   wrongPersent: {fileID: 1213273623}
   successSprite: {fileID: 21300000, guid: 84107ca853796d54e940eef9cab669f4, type: 3}
   failSprite: {fileID: 21300000, guid: 3a3accd097b51da40b9c663dfb65b52e, type: 3}
+  selectedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1299991069
 GameObject:
   m_ObjectHideFlags: 0

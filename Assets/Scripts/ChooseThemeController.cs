@@ -25,7 +25,7 @@ public class ChooseThemeController : MonoBehaviour
             word.GetComponent<Button>().onClick.AddListener(MoveToChoose);
         }
 
-        welcomeText.text = $"Здравствуйте, {storage.StudentName}. Выберите тему";
+        welcomeText.text = $"Здравствуйте, {storage.CurrentEntity.First.Name}. Выберите тему";
     }
     
     private void MoveToChoose()

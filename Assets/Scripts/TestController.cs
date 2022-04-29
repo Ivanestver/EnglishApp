@@ -11,6 +11,7 @@ public class TestController : MonoBehaviour
     [SerializeField] private GameObject[] options;
     [SerializeField] private float secondsToWait;
     [SerializeField] private Button submit, nextQuestion;
+    [SerializeField] private Storage storage;
 
     [SerializeField] private GameObject testPanel;
     [SerializeField] private GameObject resultPanel;
@@ -164,9 +165,21 @@ public class TestController : MonoBehaviour
         resultPanel.SetActive(true);
 
         correct.text = correctCount.ToString();
-        correctPersent.text = ((double)correctCount / count).ToString();
+        float correctPersentValue = (float)correctCount / count;
+        correctPersent.text = correctPersentValue.ToString();
+
         wrong.text = wrongCount.ToString();
-        wrongPersent.text = ((double)wrongCount / count).ToString();
+        float wrongPersentValue = (float)wrongCount / count;
+        wrongPersent.text = wrongPersentValue.ToString();
+
+        var currentUserResult = storage.CurrentEntity;
+        Statictics statictics = new Statictics(
+            ChooseThemeController.SelectedTheme.ThemeName,
+            ChooseTestHandler.SelectedTest.TestName,
+            correctPersentValue,
+            wrongPersentValue);
+        currentUserResult.Second = statictics;
+        storage.CurrentEntity = currentUserResult;
     }
 
     public void BackToChooseTest()

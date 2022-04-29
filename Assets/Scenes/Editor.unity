@@ -772,9 +772,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1272740431}
-        m_TargetAssemblyTypeName: MainMenuOpener, Assembly-CSharp
-        m_MethodName: OpenMainMenu
+      - m_Target: {fileID: 201784043}
+        m_TargetAssemblyTypeName: EditWindowController, Assembly-CSharp
+        m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

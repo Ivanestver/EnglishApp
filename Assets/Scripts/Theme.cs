@@ -122,8 +122,10 @@ public class Test
     public void Serialize(string folderName)
     {
         string path = $"{folderName}/{testName}";
-        if (!Directory.Exists(path))
-            Directory.CreateDirectory(path);
+        if (Directory.Exists(path))
+            Directory.Delete(path, true);
+
+        Directory.CreateDirectory(path);
 
         for (int i = 0; i < questions.Count; i++)
             using (var fs = File.CreateText($"{path}/{i}.json"))
@@ -181,6 +183,51 @@ public class Test
                 return question;
 
         return null;
+    }
+
+    public void MoveQuestionUp(Question question)
+    {
+        if (questions[0] == question)
+            return;
+
+        List<Question> newQuestions = new List<Question>();
+        for (int i = 1; i < questions.Count; i++)
+        {
+            if (questions[i] != question)
+            {
+                newQuestions.Add(questions[i - 1]);
+            }
+            else
+            {
+                newQuestions.Add(questions[i]);
+                newQuestions.Add(questions[i - 1]);
+            }
+        }
+
+        questions = newQuestions;
+    }
+
+    public void MoveQuestionDown(Question question)
+    {
+        if (questions[questions.Count - 1] == question)
+            return;
+
+        List<Question> newQuestions = new List<Question>();
+        for (int i = 0; i < questions.Count; i++)
+        {
+            if (questions[i] != question)
+            {
+                newQuestions.Add(questions[i]);
+            }
+            else
+            {
+                newQuestions.Add(questions[i + 1]);
+                newQuestions.Add(questions[i]);
+                i++;
+            }
+        }
+
+        questions = newQuestions;
     }
 }
 

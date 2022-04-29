@@ -18,11 +18,13 @@ public class CreateNewTestController : MonoBehaviour
 
     private void Start()
     {
+        defaultColor = optionGM.GetComponent<Image>().color;
         FillFields();
     }
 
     private void FillFields()
     {
+        Clear();
         testName.text = CreateNewThemeController.SelectedTest.TestName;
         var tests = CreateNewThemeController.SelectedTest.GetQuestionInstructions();
         foreach (var test in tests)
@@ -32,6 +34,17 @@ public class CreateNewTestController : MonoBehaviour
             newQuestion.GetComponentInChildren<Button>().onClick.AddListener(OnQuestionButtonClick);
             testButtonImages.Add(newQuestion.GetComponent<Image>());
         }
+    }
+
+    private void Clear()
+    {
+        if (contentPlace.childCount == 0)
+            return;
+
+        testButtonImages.Clear();
+
+        for (int i = 0; i < contentPlace.childCount; i++)
+            Destroy(contentPlace.GetChild(i).gameObject);
     }
 
     public void OnQuestionButtonClick()
@@ -76,13 +89,15 @@ public class CreateNewTestController : MonoBehaviour
             return;
 
         CreateNewThemeController.SelectedTest.DeleteQuestion(SelectedQuestion);
-        Destroy(contentPlace.GetChild(contentPlace.childCount - 1).gameObject);
+        FillFields();
+        SelectedQuestion = null;
     }
 
     public void Done()
     {
         CreateNewThemeController.SelectedTest.TestName = testName.text;
-        EditWindowController.SelectedTheme.Serialize();
+        string path = $"{Theme.rootDirectory}/{EditWindowController.SelectedTheme}";
+        CreateNewThemeController.SelectedTest.Serialize(path);
         SceneManager.LoadScene(1);
     }
 
@@ -97,5 +112,25 @@ public class CreateNewTestController : MonoBehaviour
         }        
 
         SceneManager.LoadScene(1);
+    }
+
+    public void OnMoveUpButtonClicked()
+    {
+        if (SelectedQuestion == null)
+            return;
+
+        CreateNewThemeController.SelectedTest.MoveQuestionUp(SelectedQuestion);
+        FillFields();
+        SelectedQuestion = null;
+    }
+
+    public void OnMoveDownButtonClicked()
+    {
+        if (SelectedQuestion == null)
+            return;
+
+        CreateNewThemeController.SelectedTest.MoveQuestionDown(SelectedQuestion);
+        FillFields();
+        SelectedQuestion = null;
     }
 }

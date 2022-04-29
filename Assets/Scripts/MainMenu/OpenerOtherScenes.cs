@@ -13,6 +13,11 @@ public class OpenerOtherScenes : MonoBehaviour
         SceneManager.LoadScene(6);
     }
 
+    public void OpenStat()
+    {
+        SceneManager.LoadScene(8);
+    }
+
     public void Exit()
     {
         Application.Quit();
