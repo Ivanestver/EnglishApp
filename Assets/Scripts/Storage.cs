@@ -11,6 +11,12 @@ public class Storage : ScriptableObject
     [SerializeField] private List<Pair<PersonalInfo, Statictics>> results = new List<Pair<PersonalInfo, Statictics>>();
     public List<Pair<PersonalInfo, Statictics>> Results => new List<Pair<PersonalInfo, Statictics>>(results);
 
+    public void CheckDay()
+    {
+        if (DateTime.Today.DayOfWeek == DayOfWeek.Monday)
+            ClearStatistics();
+    }
+
     public void AddNewEntity(string name, string classNumber, string school)
     {
         results.Add(new Pair<PersonalInfo, Statictics>(

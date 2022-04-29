@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41032d24073795b469a1a9de08dc130d, type: 3}
   m_Name: Storage
   m_EditorClassIdentifier: 
+  password: q
+  results: []

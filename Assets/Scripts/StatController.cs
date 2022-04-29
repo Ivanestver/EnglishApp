@@ -24,6 +24,15 @@ public class StatController : MonoBehaviour
         }
     }
 
+    public void ClearStat()
+    {
+        storage.ClearStatistics();
+        for (int i = 0; i < place.childCount; i++)
+            Destroy(place.GetChild(i).gameObject);
+
+        Start();
+    }
+
     public void BackToMenu()
     {
         SceneManager.LoadScene(0);
