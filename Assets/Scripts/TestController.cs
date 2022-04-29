@@ -38,7 +38,7 @@ public class TestController : MonoBehaviour
 
     private void Start()
     {
-        words = ChooseTestHandler.SelectedTest.Questions;
+        words = ChooseThemeController.SelectedTest.Questions;
         count = words.Count;
 
         submit.onClick.AddListener(OnSubmitButtonClick);
@@ -175,7 +175,7 @@ public class TestController : MonoBehaviour
         var currentUserResult = storage.CurrentEntity;
         Statictics statictics = new Statictics(
             ChooseThemeController.SelectedTheme.ThemeName,
-            ChooseTestHandler.SelectedTest.TestName,
+            ChooseThemeController.SelectedTest.TestName,
             correctPersentValue,
             wrongPersentValue);
         currentUserResult.Second = statictics;
