@@ -12,8 +12,6 @@ public class Validation : MonoBehaviour
     private int timesPasswordWasEntered = 0;
     private string password = "qawsedrf!";
 
-    private string inputingPassword = "";
-
     public static bool IsValidated = false;
 
     private void Start()
@@ -37,7 +35,7 @@ public class Validation : MonoBehaviour
             return;
         }
 
-        if (inputingPassword.Equals(password))
+        if (inputField.text.Equals(password))
         {
             passwordPanel.SetActive(false);
             editorPanel.SetActive(true);

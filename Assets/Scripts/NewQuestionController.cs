@@ -42,7 +42,7 @@ public class NewQuestionController : MonoBehaviour
     {
         if (CreateNewTestController.SelectedQuestion.Instruction.Length == 0)
         {
-            CreateNewThemeController.SelectedTest.DeleteQuestion(CreateNewTestController.SelectedQuestion);
+            EditWindowController.SelectedTest.DeleteQuestion(CreateNewTestController.SelectedQuestion);
             CreateNewTestController.SelectedQuestion = null;
         }
         
