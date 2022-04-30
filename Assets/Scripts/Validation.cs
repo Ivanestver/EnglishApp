@@ -10,7 +10,9 @@ public class Validation : MonoBehaviour
     [SerializeField] private GameObject editorPanel;
 
     private int timesPasswordWasEntered = 0;
-    private string password = "q";
+    private string password = "qawsedrf!";
+
+    private string inputingPassword = "";
 
     public static bool IsValidated = false;
 
@@ -35,8 +37,7 @@ public class Validation : MonoBehaviour
             return;
         }
 
-        string enteredPassword = inputField.text;
-        if (enteredPassword.Equals(password))
+        if (inputingPassword.Equals(password))
         {
             passwordPanel.SetActive(false);
             editorPanel.SetActive(true);

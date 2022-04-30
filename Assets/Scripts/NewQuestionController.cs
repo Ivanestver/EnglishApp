@@ -30,7 +30,7 @@ public class NewQuestionController : MonoBehaviour
         question.Instruction = instructionField.text;
         question.SetAnswer(0, trueField.text);
         question.SetAnswer(1, falseField1.text);
-        question.SetAnswer(2, falseField2.text);    
+        question.SetAnswer(2, falseField2.text);
 
         SceneManager.LoadScene(4);
     }

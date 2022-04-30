@@ -117,6 +117,7 @@ public class EditWindowController : MonoBehaviour
         WordsStorage.DeleteTheme(SelectedTheme);
         SelectedTheme = null;
         SelectedTest = null;
+        ClearTests();
         Init();
     }
 

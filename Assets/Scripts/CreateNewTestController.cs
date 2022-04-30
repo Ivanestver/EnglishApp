@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -58,8 +59,14 @@ public class CreateNewTestController : MonoBehaviour
         if (clickedButtonImageComponent.color == defaultColor)
         {
             clickedButtonImageComponent.color = selectedColor;
+            var splitted = clickedButton.GetComponentInChildren<Text>().text.Split(' ');
+            StringBuilder builder = new StringBuilder();
+            builder.Append(splitted[1]);
+            for (int i = 2; i < splitted.Length; i++)
+                builder.Append(" " + splitted[i]);
+
             SelectedQuestion = EditWindowController.SelectedTest.
-                GetQuestionByInstruction(clickedButton.GetComponentInChildren<Text>().text.Split(' ')[1]);
+                GetQuestionByInstruction(builder.ToString());
         }
         else
         {

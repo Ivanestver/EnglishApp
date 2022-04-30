@@ -237,14 +237,14 @@ public class Question
     private string[] answers = new string[3]; // Первый всегда верный
 
     public string Instruction { get => instruction; set => instruction = value; }
-    public string TrueValue => answers[0];
+    public string TrueValue => Encriptor.Decrypt(answers[0]);
 
     public void SetAnswer(int number, string answer)
     {
         if (number >= answers.Length)
             return;
 
-        answers[number] = answer;
+        answers[number] = Encriptor.Encript(answer);
     }
 
     public void SetAnswer(string[] answers)
@@ -257,7 +257,7 @@ public class Question
         if (number >= answers.Length)
             return "";
 
-        return answers[number];
+        return Encriptor.Decrypt(answers[number]);
     }
 
     public string Serialize()
