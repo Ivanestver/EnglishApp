@@ -12,9 +12,13 @@ public class EditWindowController : MonoBehaviour
     [SerializeField] private Color selectedColor;
     [SerializeField] private InputField themeName;
     private Color defaultColor;
+    // Чтобы проще назначать цвета для тем
     private List<Image> themeButtonImages = new List<Image>();
+    // Чтобы проще назначать цвета для тестов
     private List<Image> testButtonImages = new List<Image>();
 
+    // Так как нет встроенных способов передачи информации между сценами,
+    // приходится исползовать статические переменые
     public static Theme SelectedTheme = null;
     public static Test SelectedTest = null;
 

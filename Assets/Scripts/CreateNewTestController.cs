@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// Класс для создания нового теста
 public class CreateNewTestController : MonoBehaviour
 {
     [SerializeField] private GameObject optionGM;
@@ -15,6 +16,7 @@ public class CreateNewTestController : MonoBehaviour
     public static Question SelectedQuestion = null;
 
     private Color defaultColor;
+    // Чтобы проще назначать цвета
     private List<Image> testButtonImages = new List<Image>();
 
     private void Start()
@@ -23,6 +25,7 @@ public class CreateNewTestController : MonoBehaviour
         FillFields();
     }
 
+    // Заполнить список вопросов для данного текста
     private void FillFields()
     {
         Clear();
@@ -48,6 +51,7 @@ public class CreateNewTestController : MonoBehaviour
             Destroy(contentPlace.GetChild(i).gameObject);
     }
 
+    // Обработка нажатия на вопрос
     public void OnQuestionButtonClick()
     {
         var clickedButton = EventSystem.current.currentSelectedGameObject;
@@ -59,6 +63,7 @@ public class CreateNewTestController : MonoBehaviour
         if (clickedButtonImageComponent.color == defaultColor)
         {
             clickedButtonImageComponent.color = selectedColor;
+            // Нужно отделить #n от остального названия
             var splitted = clickedButton.GetComponentInChildren<Text>().text.Split(' ');
             StringBuilder builder = new StringBuilder();
             builder.Append(splitted[1]);
@@ -101,6 +106,7 @@ public class CreateNewTestController : MonoBehaviour
         SelectedQuestion = null;
     }
 
+    // Обработка нажатия "Готово"
     public void Done()
     {
         EditWindowController.SelectedTest.TestName = testName.text;
@@ -122,6 +128,7 @@ public class CreateNewTestController : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
+    // Сдвинуть выбранный вопрос вверх
     public void OnMoveUpButtonClicked()
     {
         if (SelectedQuestion == null)
@@ -132,6 +139,7 @@ public class CreateNewTestController : MonoBehaviour
         SelectedQuestion = null;
     }
 
+    // Сдвинуть выбранный вопрос вниз
     public void OnMoveDownButtonClicked()
     {
         if (SelectedQuestion == null)

@@ -45,6 +45,7 @@ public class WordsStorage : ScriptableObject
         return new Theme();
     }
 
+    // Полное сохранение данных
     public static void SaveData()
     {
         foreach (var theme in themes)
@@ -57,44 +58,5 @@ public class WordsStorage : ScriptableObject
     {
         theme.DeleteThisTheme();
         themes.Remove(theme);
-    }
-}
-
-[Serializable]
-public struct WordMeaning
-{
-    private string word;
-    private string meaning;
-
-    public WordMeaning(WordMeaning other)
-    {
-        word = other.word;
-        meaning = other.meaning;
-    }
-
-    public WordMeaning(string word, string meaning)
-    {
-        this.word = word;
-        this.meaning = meaning;
-    }
-
-    public string Word
-    {
-        get => word;
-        set
-        {
-            if (value.Length != 0)
-                word = value;
-        }
-    }
-
-    public string Meaning
-    {
-        get => meaning;
-        set
-        {
-            if (value.Length != 0)
-                meaning = value;
-        }
     }
 }

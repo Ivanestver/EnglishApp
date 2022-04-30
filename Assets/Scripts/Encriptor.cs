@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
+// Шифрует ответы
 public class Encriptor : MonoBehaviour
 {
     private static int key = 1;

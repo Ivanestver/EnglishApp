@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Содержит функции для перехода из главного меню
 public class OpenerOtherScenes : MonoBehaviour
 {
     [SerializeField] private Storage storage;

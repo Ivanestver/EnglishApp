@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
+// Класс, описывающий Тему
 public class Theme
 {
     private List<Test> tests = new List<Test>();
@@ -34,6 +35,7 @@ public class Theme
         test.DeleteQuestion(question);
     }
 
+    // Сохраняет тему со всеми тестами и вопросами в файл
     public void Serialize()
     {
         string path = $"{rootDirectory}/{themeName}";
@@ -53,6 +55,7 @@ public class Theme
             Directory.Delete(path, true);
     }
 
+    // Извлекает тему со всеми тестами и вопросами из файла
     public void Deserialize()
     {
         string path = $"{rootDirectory}/{themeName}";
@@ -87,6 +90,7 @@ public class Theme
     }
 }
 
+// Класс, описывающий тест
 public class Test
 {
     private List<Question> questions = new List<Question>();
@@ -119,6 +123,7 @@ public class Test
         questions.Remove(question);
     }
 
+    // Записывает в файлы данные
     public void Serialize(string folderName)
     {
         string path = $"{folderName}/{testName}";
@@ -154,6 +159,7 @@ public class Test
         }
     }
 
+    // Извлекает из файлов данные
     public void Deserialize(string folderName)
     {
         string path = $"{folderName}/{testName}";
@@ -185,6 +191,7 @@ public class Test
         return null;
     }
 
+    // Сдвинуть данный вопрос вверх
     public void MoveQuestionUp(Question question)
     {
         if (questions[0] == question)
@@ -207,6 +214,7 @@ public class Test
         questions = newQuestions;
     }
 
+    // Сдвинуть данный вопрос вниз
     public void MoveQuestionDown(Question question)
     {
         if (questions[questions.Count - 1] == question)
@@ -231,6 +239,7 @@ public class Test
     }
 }
 
+// Класс, описывающий вопрос
 public class Question
 {
     private string instruction = "";
@@ -260,11 +269,13 @@ public class Question
         return Encriptor.Decrypt(answers[number]);
     }
 
+    // Подготовка данных к записи
     public string Serialize()
     {
         return $"{answers[0]};{answers[1]};{answers[2]};{instruction.Replace(' ', '_')}";
     }
 
+    // Извлечение данных
     public void Deserialize(string str)
     {
         var splitted = str.Split(';');

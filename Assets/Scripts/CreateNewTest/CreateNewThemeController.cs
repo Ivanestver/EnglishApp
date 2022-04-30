@@ -14,6 +14,7 @@ public class CreateNewThemeController : MonoBehaviour
     public static Test SelectedTest = null;
 
     private Color defaultColor;
+    // Чтобы проще назначать цвета
     private List<Image> testButtonImages = new List<Image>();
 
     private void Start()

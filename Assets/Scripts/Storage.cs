@@ -8,6 +8,7 @@ public class Storage : ScriptableObject
     [SerializeField] private string password = "q";
     public string Password { get => password; set => password = value; }
 
+    // Статистика учеников
     [SerializeField] private List<Pair<PersonalInfo, Statictics>> results = new List<Pair<PersonalInfo, Statictics>>();
     public List<Pair<PersonalInfo, Statictics>> Results => new List<Pair<PersonalInfo, Statictics>>(results);
 
@@ -25,6 +26,7 @@ public class Storage : ScriptableObject
             ));
     }
 
+    // Последний добавленный - самый свежий. Поэтому он и возвращается
     public Pair<PersonalInfo, Statictics> CurrentEntity
     {
         get

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// Содержит логику создания вопроса
 public class NewQuestionController : MonoBehaviour
 {
     [SerializeField] private InputField instructionField, trueField, falseField1, falseField2;
@@ -17,7 +18,8 @@ public class NewQuestionController : MonoBehaviour
         falseField1.text = question.GetAnswerByNumber(1);
         falseField2.text = question.GetAnswerByNumber(2);
     }
-
+    
+    //  Нажатие на кнопку "Готово"
     public void OnSubmit()
     {
         string instruction = instructionField.text;
@@ -35,6 +37,7 @@ public class NewQuestionController : MonoBehaviour
         SceneManager.LoadScene(4);
     }
 
+    // Обработка нажатия на кнопку "Отмена"
     public void OnCancel()
     {
         if (CreateNewTestController.SelectedQuestion.Instruction.Length == 0)

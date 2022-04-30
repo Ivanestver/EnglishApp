@@ -33,6 +33,7 @@ public class TestController : MonoBehaviour
     private Color defaultColor = new Color();
     private Question currentQuestion = null;
     private int currentWordPlace = 0;
+    // Чтобы проще назначать цвета
     private Image[] testButtonImages = new Image[3];
     private bool isChosen = false;
 
@@ -75,6 +76,7 @@ public class TestController : MonoBehaviour
         }
     }
 
+    // Анализирует ответ ученика и определяет, верный ли ответ или нет
     private void OnSubmitButtonClick()
     {
         for (int i = 0; i < options.Length; i++)
@@ -82,12 +84,12 @@ public class TestController : MonoBehaviour
             if (options[i].GetComponent<Image>().color != defaultColor)
             {
                 if (options[i].GetComponentInChildren<Text>().text.Equals(currentQuestion.TrueValue))
-                {
+                { // Ответ верен
                     correctCount++;
                     OnSuccess(options[i].transform.GetChild(1).gameObject);
                 }
                 else
-                {
+                { // Ответ неверный
                     wrongCount++;
                     OnFail(options[currentWordPlace].transform.GetChild(1).gameObject, options[i].transform.GetChild(1).gameObject);
                 }
@@ -113,6 +115,7 @@ public class TestController : MonoBehaviour
         wrong.GetComponent<Image>().sprite = failSprite;
     }
 
+    // Нажатие на кнопу "Следующий вопрос"
     private void OnNextPressed()
     {
         if (!isChosen)
@@ -129,6 +132,7 @@ public class TestController : MonoBehaviour
         isChosen = false;
     }
 
+    // Шаг теста: определение, на каких местах будут стоять варианты ответов
     private bool Step()
     {
         if (words.Count == 0)

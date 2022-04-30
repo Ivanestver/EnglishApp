@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// Класс для обработки статистики
 public class StatController : MonoBehaviour
 {
     [SerializeField] private Storage storage;
